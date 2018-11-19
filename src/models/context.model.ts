@@ -1,3 +1,5 @@
+import { Config } from './config.model'
+
 /**
  * Context interface used to model
  * depdencies injected into each module.
@@ -5,4 +7,5 @@
  */
 export interface Context {
   isTestMode: boolean
+  config: Config
 }
