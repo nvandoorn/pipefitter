@@ -12,8 +12,8 @@ export interface Config {
   // 0 actually represents 0 clients.
   maxClientsForTest: number
   testPeriod: number // how many seconds between each test
-  adapter: string // default to "actiontec-ts3200m"
-  testServices: string[] // default to ["fast"]
+  adapter: string // default to "actiontec-t3200m"
+  testServices: string[] // default to ["fast", "ookla"]
   serviceSpec: string // default to "telus-victoria-75"
-  reporters: string[] // default to "firebase"
+  reporters: string[] // default to ["firebase"]
 }
