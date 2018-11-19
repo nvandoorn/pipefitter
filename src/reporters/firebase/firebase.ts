@@ -6,6 +6,7 @@ export class Firebase implements Reporter {
   name = 'Firebase Reporter'
   constructor(private ctx: Context) {}
   public record(r: Report): boolean {
+    this.ctx.logger(r)
     return true
   }
 
