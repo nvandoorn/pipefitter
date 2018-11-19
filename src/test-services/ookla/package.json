@@ -2,5 +2,8 @@
   "name": "pipefitter-test-service-ookla",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "speedtest-net": "^1.4.3"
+  }
 }
