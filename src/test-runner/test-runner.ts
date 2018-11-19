@@ -103,5 +103,14 @@ export const testService = async (
   const download = await service.testDownload()
   const upload = await service.testUpload()
   const datetime = Date.now() / 1000
-  return { nConnectedClients, uptime, leaseTime, download, upload, datetime }
+  return {
+    nConnectedClients,
+    uptime,
+    leaseTime,
+    download,
+    upload,
+    datetime,
+    adapter: adapter.name,
+    service: service.name
+  }
 }

@@ -10,4 +10,6 @@ export interface Report {
   uptime: number
   leaseTime: number
   datetime: number // unix epoch seconds
+  service: string
+  adapter: string
 }
