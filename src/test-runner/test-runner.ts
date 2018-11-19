@@ -3,6 +3,7 @@ import { Config } from '../models/config.model'
 import { Adapter } from '../models/adapter.model'
 import { TestService } from '../models/test-service.model'
 import { Reporter } from '../models/reporter.model'
+import { Report } from '../models/report.model'
 import { Context } from '../models/context.model'
 
 // Physical hardware adapters (a standard Telus one for now)
@@ -31,7 +32,8 @@ const reportersMap = {
 const mapToObj = (keys: string[], mapObj: Object) =>
   keys.map(k => mapObj[k]).filter(k => k != null)
 
-export const testRunner = (ctx: Context) => {
+export const testRunner = async (ctx: Context) => {
+  const { config } = ctx
   // Users configure which adapters/services/reporters
   // they want to use in Context.config. These "plugins"
   // are configured using strings, so we use "map" objects
@@ -45,5 +47,51 @@ export const testRunner = (ctx: Context) => {
   const makeReporters = (reporters: string[]): Reporter[] =>
     mapToObj(reporters, reportersMap).map(newWithCtx)
 
-  const adapterClass = adapterMap[ctx.config.adapter]
+  const adapterClass = adapterMap[config.adapter]
+  // only 'new' it if we found an adapter in the map
+  const adapter = adapterClass ? new adapterClass(ctx) : undefined
+  const services = makeTestServices(config.testServices)
+  const reporters = makeReporters(config.reporters)
+  const reports = await testEachService(adapter, services, ctx)
+  reportEach(reporters, reports, ctx)
+}
+
+export const reportEach = async (
+  reporters: Reporter[],
+  reports: Report[],
+  ctx: Context
+): Promise<void> => {
+  for (let reporter of reporters) {
+    ctx.logger(`Reporting results to ${reporter.name}`)
+    for (let report of reports) {
+      reporter.record(report)
+    }
+    await reporter.publish()
+  }
+}
+
+export const testEachService = async (
+  adapter: Adapter,
+  services: TestService[],
+  ctx: Context
+): Promise<Report[]> => {
+  let reports = []
+  for (let service of services) {
+    const report = await testService(adapter, service, ctx)
+    reports.push(report)
+  }
+  return reports
+}
+
+export const testService = async (
+  adapter: Adapter,
+  service: TestService,
+  ctx: Context
+): Promise<Report> => {
+  const nConnectedClients = await adapter.nConnectedClients()
+  const uptime = await adapter.uptime()
+  const leaseTime = await adapter.leaseTime()
+  const download = await service.testDownload()
+  const upload = await service.testUpload()
+  return { nConnectedClients, uptime, leaseTime, download, upload }
 }
