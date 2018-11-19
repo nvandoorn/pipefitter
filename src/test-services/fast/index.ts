@@ -1,0 +1,1 @@
+export { Fast } from './fast'
