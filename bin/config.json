@@ -1,0 +1,8 @@
+{
+  "maxClientsForTest": 2,
+  "testPeriod": 10000,
+  "adapter": "actiontec-t3200m",
+  "testServices": ["fast", "ookla"],
+  "serviceSpec": "telus-victoria-75",
+  "reporters": ["firebase"]
+}
