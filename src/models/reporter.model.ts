@@ -7,6 +7,7 @@ import { Context } from './context.model'
  * will be supported
  */
 export interface Reporter {
+  name: string
   constructor(ctx: Context)
   // record a single Report into a local
   // buffer
