@@ -5,6 +5,7 @@ import { TestService } from '../models/test-service.model'
 import { Reporter } from '../models/reporter.model'
 import { Report } from '../models/report.model'
 import { Context } from '../models/context.model'
+import { ExecState } from '../models/exec-state.model'
 
 // Physical hardware adapters (a standard Telus one for now)
 import { ActiontecTS3200M } from '../adapters/actiontec-t3200m'
@@ -15,6 +16,8 @@ import { Fast } from '../test-services/fast'
 
 // Data reporters
 import { Firebase } from '../reporters/firebase'
+
+import { Scheduler } from '../scheduler'
 
 const adapterMap = {
   'actiontec-ts3200m': ActiontecTS3200M
@@ -51,9 +54,14 @@ export const testRunner = async (ctx: Context) => {
   // only 'new' it if we found an adapter in the map
   const adapter = adapterClass ? new adapterClass(ctx) : undefined
   const services = makeTestServices(config.testServices)
-  const reporters = makeReporters(config.reporters)
-  const reports = await testEachService(adapter, services, ctx)
-  reportEach(reporters, reports, ctx)
+  const scheduler = new Scheduler(ctx, adapter)
+
+  const testCallback = async (e: ExecState) => {
+    const reporters = makeReporters(config.reporters)
+    const reports = await testEachService(adapter, services, ctx)
+    reportEach(reporters, reports, ctx)
+  }
+  scheduler.subscribe(testCallback)
 }
 
 export const reportEach = async (
@@ -93,5 +101,6 @@ export const testService = async (
   const leaseTime = await adapter.leaseTime()
   const download = await service.testDownload()
   const upload = await service.testUpload()
-  return { nConnectedClients, uptime, leaseTime, download, upload }
+  const datetime = Date.now() / 1000
+  return { nConnectedClients, uptime, leaseTime, download, upload, datetime }
 }
