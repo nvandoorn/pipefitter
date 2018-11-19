@@ -8,7 +8,7 @@ import { Context } from '../models/context.model'
 import { ExecState } from '../models/exec-state.model'
 
 // Physical hardware adapters (a standard Telus one for now)
-import { ActiontecTS3200M } from '../adapters/actiontec-t3200m'
+import { ActiontecT3200M } from '../adapters/actiontec-t3200m'
 
 // Test providers
 import { Ookla } from '../test-services/ookla'
@@ -20,7 +20,7 @@ import { Firebase } from '../reporters/firebase'
 import { Scheduler } from '../scheduler'
 
 const adapterMap = {
-  'actiontec-ts3200m': ActiontecTS3200M
+  'actiontec-t3200m': ActiontecT3200M
 }
 
 const testServiceMap = {
@@ -85,6 +85,7 @@ export const testEachService = async (
 ): Promise<Report[]> => {
   let reports = []
   for (let service of services) {
+    ctx.logger(`Testing ${service.name}`)
     const report = await testService(adapter, service, ctx)
     reports.push(report)
   }
