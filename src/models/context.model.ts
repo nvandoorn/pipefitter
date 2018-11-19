@@ -8,5 +8,5 @@ import { Config } from './config.model'
 export interface Context {
   isTestMode: boolean
   config: Config
-  logger: (r: Error | string) => void
+  logger: (r: Error | string | any) => void
 }
