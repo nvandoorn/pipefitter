@@ -8,7 +8,7 @@ import { Context } from './context.model'
  * so it be cool to support quite a few of these.
  */
 export interface TestService {
-  constructor(ctx: Context)
+  name: string
   testDownload(): Promise<number> // kb/s
   testUpload(): Promise<number>
   serverLocation(): Promise<string> // eg. Victoria, BC

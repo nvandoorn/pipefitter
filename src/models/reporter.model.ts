@@ -8,7 +8,6 @@ import { Context } from './context.model'
  */
 export interface Reporter {
   name: string
-  constructor(ctx: Context)
   // record a single Report into a local
   // buffer
   record(r: Report): boolean
