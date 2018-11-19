@@ -1,2 +1,19 @@
 import { Adapter } from '../../models/adapter.model'
-export class ActiontecTS3200M implements Adapter {}
+import { Context } from '../../models/context.model'
+
+export class ActiontecT3200M implements Adapter {
+  constructor(private ctx: Context) {}
+  isOnline = async (): Promise<boolean> => {
+    return true
+  }
+  uptime = async (): Promise<number> => {
+    return 5
+  }
+  nConnectedClients = async (): Promise<number> => {
+    return 2
+  }
+
+  leaseTime = async (): Promise<number> => {
+    return 2
+  }
+}
