@@ -8,7 +8,7 @@ export type SubscribeCallback = (e: ExecState) => Promise<any>
 const getExecState = (): ExecState => ({
   cpuUsage: os.cpus(),
   freeMem: os.freemem(),
-  systemUptime: os.updatime()
+  systemUptime: os.uptime()
 })
 
 export class Scheduler {
