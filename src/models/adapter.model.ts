@@ -13,6 +13,7 @@ import { Context } from './context.model'
  * or connect in each of these methods)
  */
 export interface Adapter {
+  name: string
   isOnline(): Promise<boolean>
   uptime(): Promise<number> // seconds
   nConnectedClients(): Promise<number>

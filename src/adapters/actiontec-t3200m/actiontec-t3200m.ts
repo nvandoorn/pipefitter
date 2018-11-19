@@ -2,6 +2,7 @@ import { Adapter } from '../../models/adapter.model'
 import { Context } from '../../models/context.model'
 
 export class ActiontecT3200M implements Adapter {
+  name = 'ActiontecT3200M'
   constructor(private ctx: Context) {}
   isOnline = async (): Promise<boolean> => {
     return true
