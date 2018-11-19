@@ -5,5 +5,9 @@
   "license": "MIT",
   "dependencies": {
     "typescript": "^3.1.6"
+  },
+  "scripts": {
+    "build": "tsc && cp bin/config.json build/bin",
+    "build:run": "yarn run build && node build/bin/index.js"
   }
 }
