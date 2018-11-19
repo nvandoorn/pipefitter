@@ -9,4 +9,5 @@ export interface Report {
   nConnectedClients: number
   uptime: number
   leaseTime: number
+  datetime: number // unix epoch seconds
 }
