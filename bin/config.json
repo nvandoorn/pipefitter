@@ -1,6 +1,7 @@
 {
   "maxClientsForTest": 2,
-  "testPeriod": 10000,
+  "testPeriod": 5000,
+  "nTestSamples": 30,
   "adapter": "actiontec-t3200m",
   "testServices": ["fast", "ookla"],
   "serviceSpec": "telus-victoria-75",
