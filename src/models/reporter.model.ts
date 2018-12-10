@@ -10,8 +10,8 @@ export interface Reporter {
   name: string
   // record a single Report into a local
   // buffer
-  record(r: Report): boolean
+  record(r: Report): void
   // publish the current buffer and
   // report the success
-  publish(): Promise<boolean>
+  publish(): Promise<void>
 }
