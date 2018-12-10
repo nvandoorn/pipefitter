@@ -34,8 +34,8 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 
-brnkl-latest.apk
 .sourcemaps
 GoogleService-Info.plist
 credentials
 google-services.json
+creds.json
