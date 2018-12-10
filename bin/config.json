@@ -3,7 +3,12 @@
   "testPeriod": 5000,
   "nTestSamples": 30,
   "adapter": "actiontec-t3200m",
-  "testServices": ["fast", "ookla"],
+  "adapterUrl": "http://192.168.1.254/",
+  "testServices": ["ookla"],
   "serviceSpec": "telus-victoria-75",
-  "reporters": ["firebase"]
+  "reporters": ["file", "sheets"],
+  "reportFilename": "report.json",
+  "sheetsDocKey": "1uu-pWklGfdqbnOhdfiLpD2rEbwjMtSgW4opPU4hgZzc/edit#gid=0",
+  "sheetsSheetName": "Pipefitter",
+  "sheetsCredPath": "creds.json"
 }
