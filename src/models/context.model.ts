@@ -9,4 +9,5 @@ export interface Context {
   isTestMode: boolean
   config: Config
   logger: (r: Error | string | any) => void
+  rootDir: string
 }
