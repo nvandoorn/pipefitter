@@ -39,3 +39,5 @@ GoogleService-Info.plist
 credentials
 google-services.json
 creds.json
+build
+report.*.json
