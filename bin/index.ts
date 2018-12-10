@@ -1,4 +1,3 @@
-import fs from 'fs'
 import process from 'process'
 import { Config, validateConfig } from '../src/models/config.model'
 import { Context } from '../src/models/context.model'
