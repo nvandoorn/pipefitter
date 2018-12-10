@@ -22,6 +22,8 @@ import { File } from '../reporters/file'
 
 import { Scheduler } from '../scheduler'
 
+import { now } from '../util'
+
 const adapterMap = {
   'actiontec-t3200m': ActiontecT3200M
 }
@@ -36,8 +38,6 @@ const reportersMap = {
   sheets: Sheets,
   file: File
 }
-
-const now = () => Date.now() / 1000
 
 const mapToObj = (keys: string[], mapObj: Object) =>
   keys.map(k => mapObj[k]).filter(k => k != null)
