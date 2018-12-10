@@ -17,4 +17,12 @@ export interface Config {
   serviceSpec: string // default to "telus-victoria-75"
   reporters: string[] // default to ["firebase"]
   nTestSamples: number // number of required samples when testing
+
+  reportFilename?: string
+
+  sheetsDocKey?: string
+
+  sheetsCredPath?: string
+
+  sheetsSheetName?: string
 }
