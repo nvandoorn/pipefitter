@@ -14,7 +14,7 @@ import { testRunner } from '../src/test-runner'
     process.exit(1)
   }
   const ctx: Context = {
-    isTestMode: process.env.NODE_ENV === 'production',
+    isTestMode: process.env.NODE_ENV !== 'production',
     logger: console.log,
     rootDir: __dirname,
     config
